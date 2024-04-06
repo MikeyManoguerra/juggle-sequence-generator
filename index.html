@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Sequence Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .inner {
+      margin-right: 20px;
+      margin-left: 20px;
+    }
+
+    @media  (min-width: 1200px) {
+      .inner {
+        width: 1160px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+
+    ul{
+      list-style-type: none;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="inner">
+      <ul id="ul">
+
+      </ul>
+    </div>
+  </main>
+</body>
+
+<script>
+  const library = [
+    [
+      'hookshot',
+      'placement',
+    ],
+    [
+      'knee placement',
+      'chest placement',
+      'head placement',
+    ],
+    [
+      'head placement',
+      'chest placement',
+      'knee placement',
+    ],
+    [
+      'knee cap placement',
+      'hookshot',
+    ],
+    [
+      '4 forearm tip',
+      '2',
+      'jackknife placement',
+    ],
+    [
+      'lazy',
+      'backcross',
+    ],
+    [
+      'backcross',
+      'lazy',
+    ],
+    [
+      'head placement',
+      'arm flat roll',
+    ],
+    [
+      'jackknife placement',
+      'head placement',
+    ],
+    [
+      'head placement',
+      'jackknife placement',
+    ],
+    [
+      'forearm tip',
+      '4',
+      '2',
+      'jackknife placement',
+    ],
+    [
+      'placement',
+      'lazy',
+    ],
+    [
+      'backcross',
+      'placement',
+    ],
+  ]
+
+
+  function randomIndex(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  function choose(source, count) {
+    return Array(count).fill(0).map(_ => source.at(randomIndex(source.length)));
+  }
+
+  const blocks = choose(library, 3);
+  const ul = document.getElementById('ul');
+
+  blocks.forEach((block, i) => {
+    if (i !== 0) {
+      const seperator = document.createElement('li');
+
+      seperator.textContent = '.';
+      ul.appendChild(seperator);
+    }
+
+    block.forEach(move => {
+      const el = document.createElement('li');
+
+      el.textContent = move;
+      ul.appendChild(el);
+    });
+  });
+</script>
+
+</html>
