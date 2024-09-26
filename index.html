@@ -3,10 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sequence Generator</title>
   <style>
     * {
@@ -24,7 +21,7 @@
       margin-left: 20px;
     }
 
-    @media  (min-width: 1200px) {
+    @media (min-width: 1200px) {
       .inner {
         width: 1160px;
         margin-right: auto;
@@ -32,8 +29,22 @@
       }
     }
 
-    ul{
+    ul {
       list-style-type: none;
+    }
+
+    li {
+      margin-top: 5px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: tomato;
     }
   </style>
 </head>
@@ -55,58 +66,42 @@
       'placement',
     ],
     [
-      'knee placement',
-      'chest placement',
-      'head placement',
-    ],
-    [
-      'head placement',
-      'chest placement',
-      'knee placement',
-    ],
-    [
       'knee cap placement',
       'hookshot',
     ],
-    [
-      '4 forearm tip',
-      '2',
-      'jackknife placement',
-    ],
-    [
-      'lazy',
-      'backcross',
-    ],
-    [
-      'backcross',
-      'lazy',
-    ],
-    [
-      'head placement',
-      'arm flat roll',
-    ],
-    [
-      'jackknife placement',
-      'head placement',
-    ],
-    [
-      'head placement',
-      'jackknife placement',
-    ],
-    [
-      'forearm tip',
-      '4',
-      '2',
-      'jackknife placement',
-    ],
-    [
-      'placement',
-      'lazy',
-    ],
-    [
-      'backcross',
-      'placement',
-    ],
+    'knee placement',
+    'chest placement',
+    'head placement',
+    '4 forearm tip',
+    'lazy',
+    'backcross',
+    'arm flat roll',
+    'jackknife placement',
+    'forearm tip',
+    '4',
+    'placement',
+    '3 shoulderpad',
+    '4 shoulderpad',
+    'neck bounce',
+    'halo',
+    'chop',
+    'reverse chop',
+    'inward chop',
+    'downward shoulderpad',
+    'downward shoulderpad behind the neck',
+    'conveyorbelt',
+    'under the leg',
+    'under the leg catch',
+    'reverse backcross',
+    'wall plane flat',
+    'wall plane single',
+    'wall plane reverse',
+    'back of hand',
+    'elbow hold',
+    'armpit hold',
+    'multiplex',
+    '3',
+
   ]
 
 
@@ -118,22 +113,29 @@
     return Array(count).fill(0).map(_ => source.at(randomIndex(source.length)));
   }
 
-  const blocks = choose(library, 3);
+  const trickList = choose(library, 10).flat();
   const ul = document.getElementById('ul');
 
-  blocks.forEach((block, i) => {
-    if (i !== 0) {
+  trickList.forEach((move, i) => {
+    if (i !== 0 && (i % 5 === 0)) {
       const seperator = document.createElement('li');
 
-      seperator.textContent = '.';
+      seperator.innerHTML = '&nbsp;';
       ul.appendChild(seperator);
     }
 
-    block.forEach(move => {
-      const el = document.createElement('li');
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    const button = document.createElement('button');
 
-      el.textContent = move;
-      ul.appendChild(el);
+    span.textContent = move;
+    li.appendChild(span);
+    li.appendChild(button);
+    ul.appendChild(li);
+
+
+    button.addEventListener('click', (event) => {
+      event.target.parentNode.remove();
     });
   });
 </script>
